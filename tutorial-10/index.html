@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title></title>
+		<style>
+			.row {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				grid-template-rows: repeat(3, 1fr);
+				grid-gap: 10px;
+			}
+
+			.row > * {
+				width: 100%;
+			}
+
+				/* sets the "main" image as a big, rectangular blocl */
+				.main {
+					background-color: #929fb5;
+					grid-column: 1/5;
+					grid-row: 2/4;
+				}
+					.main > .mainImg {
+						object-fit: cover;
+						align-content: center;
+						padding: 10%;
+						max-width: 100%;
+						max-height: 100%;
+					}
+		</style>
+		<script>
+
+			function initialize() {
+				mainImg = document.getElementById("mainImg");
+			};
+			
+			// pass in the current element's image path, then changing
+			// main img's image to the file path passed in
+			function changeMain(passImg){
+				mainImg.src=passImg;
+			};
+
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<div class="row">
+			<!-- attempting to use this function to pass in the current image's image path 
+			and using changeMain() to change mainImg's image into that image -->
+			<img class="rImg 1" src="images/mature-oak-tree-3d-model-obj.jpg" onclick="changeMain(this.src)">
+			<img class="rImg 2" src="images/Sawtooth-Oak_450_a.jpg" onclick="changeMain(this.src)">
+			<img class="rImg 3" src="images/wise-old-oak-annajo-vahle.jpg" onclick="changeMain(this.src)">
+			<img class="rImg 4" src="images/wtr1623-woodland-scenics-hickory-5-1-pkg.--1194-p.jpg" onclick="changeMain(this.src)">
+			<div class="main"><img class="mainImg" id="mainImg" src=""></div>
+		</div>
+	</body>
+</html>
