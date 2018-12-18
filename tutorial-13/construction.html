@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>Template</title>
+        
+        <script>
+            function initializer(){
+                numTwixOutput = document.getElementById("numTwix");
+                numEggsOutput = document.getElementById("numEggs");
+                numTwizzlersutput = document.getElementById("numTwizzlers");
+                numAirheadsOutput = document.getElementById("numAirheads");
+                numRingPopsOutput = document.getElementById("numRingPops");
+                candyLogOutput = document.getElementById("candyLog");
+            }
+
+            function display() {
+                numTwixOutput.innerHTML = parseInt(Math.random() * 11);
+                numEggsOutput.innerHTML = parseInt(Math.random() * 11);
+                numTwizzlersutput.innerHTML = parseInt(Math.random() * 11);
+                numAirheadsOutput.innerHTML = parseInt(Math.random() * 11);
+                numRingPopsOutput.innerHTML = parseInt(Math.random() * 11);
+
+                candyLogOutput.innerHTML = "";
+            }
+
+
+        </script>
+
+        <style>
+        </style>
+
+    </head>
+
+    <body onload="initialize();">
+        <div class="candy">
+            Twix: <span id="numTwix"></span><br />
+            Scream Eggs: <span id="numEggs"></span><br />
+            Twizzlers: <span id="numTwizzlers"></span><br />
+            Airheads: <span id="numAirheads"></span><br />
+            Ring Pops: <span id="numRingPops"></span><br />
+
+            <button onclick="giveCandy();">Give out Candy</button><br />
+        </div>
+
+        <div id="candyLog"></div>
+    </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>Template</title>
+        
+        <script>
+            numbers = [];
+            occurrences = {
+                1:0,
+                2:0,
+                3:0,
+                4:0,
+                5:0,
+                6:0
+            }
+
+            function initialize(){
+                numbersLog = document.getElementById("numbers-log");
+                occurrencesEle = document.getElementById("occurrences");
+            };
+
+            function rollDice(){
+                randRoll = Math.floor(Math.random() * 6) + 1;
+                numbers.push(randRoll);
+                occurrences[randRoll]++;
+                update();
+            };
+
+            function update(){
+                numbersLog.innerHTML=(numbers.join("\n"));
+            };
+
+            function main(times){
+                for (i=0;i<times;i++){
+                    rollDice();
+                };
+            };
+        </script>
+
+        <style>
+        </style>
+
+    </head>
+
+    <body onload="initialize();">
+        <button type="button" onclick="main(1);">Roll 1 die</button>
+        <button type="button" onclick="main(5);">Roll 5 dice</button>
+        <button type="button" onclick="main(10);">Roll 10 dice</button>
+        <div id="numbers-log"></div>
+        <div id="occurrences">
+            <p id="1"></p>
+            <p id="2"></p>
+            <p id="3"></p>
+            <p id="4"></p>
+            <p id="5"></p>
+            <p id="6"></p>
+        </div>
+    </body>
+</html>

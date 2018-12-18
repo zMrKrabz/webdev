@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>TUTORIAL 11</title>
+
+        <!--Import Boostrap 4-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        <script>
+            red = 0;
+            green = 0;
+            blue = 0;
+
+            function changeColor(color, amount){
+
+                // switch statement to see which color is chosen
+                switch (color){
+                    case 'red':
+                        if (0<=red<=255){
+                            red += amount;
+                            console.log(red);
+                        };
+                        
+                        if (red > 255){
+                            red = 255;
+                        } else if (red < 0){
+                            red = 0;
+                        };
+                        break;
+
+                    case 'green':
+                        if (0<=green<=255){
+                            green += amount;
+                            console.log(green);
+
+                            if (green > 255){
+                                green = 255;
+                            } else if (green < 0){
+                                green = 0;
+                            };
+                        };
+
+                        break;
+
+                    case 'blue': 
+                        if (0<=blue<=255){
+                            blue += amount;
+                            console.log(blue);
+
+                            if (blue > 255){
+                                blue = 255;
+                            } else if (blue < 0){
+                                blue = 0;
+                            }
+                        };
+
+                        break;
+                };
+
+                // formats string and uses rgb() to change background color
+                document.body.style.backgroundColor=`rgb(${red}, ${green}, ${blue})`;
+                console.log(`rgb(${red}, ${green}, ${blue})`)
+            };
+        </script>
+
+        <style>
+            body{
+                background-color:rgb(0, 0, 0);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="row">
+            <span class="col-sm-2"><button type="button" class="btn btn-danger" onclick="changeColor('red', 1)">Red +1</button></span>
+            <span class="col-sm-2"><button type="button" class="btn btn-danger" onclick="changeColor('red', -1)">Red -1</button></span>
+            <span class="col-sm-2"><button type="button" class="btn btn-danger" onclick="changeColor('red', 5)">Red +5</button></span>
+            <span class="col-sm-2"><button type="button" class="btn btn-danger" onclick="changeColor('red', -5)">Red -5</button></span>
+            <span class="col-sm-2"><button type="button" class="btn btn-danger" onclick="changeColor('red', 10)">Red +10</button></span>
+            <span class="col-sm-2"><button type="button" class="btn btn-danger" onclick="changeColor('red', -10)">Red -10</button></span>
+
+            <span class="col-sm-2"><button type="button" class="btn btn-success" onclick="changeColor('green', 1)">Green +1</button></span>
+            <span class="col-sm-2"><button type="button" class="btn btn-success" onclick="changeColor('green', -1)">Green -1</button></span>
+            <span class="col-sm-2"><button type="button" class="btn btn-success" onclick="changeColor('green', 5)">Green +5</button></span>
+            <span class="col-sm-2"><button type="button" class="btn btn-success" onclick="changeColor('green', -5)">Green -5</button></span>
+            <span class="col-sm-2"><button type="button" class="btn btn-success" onclick="changeColor('green', 10)">Green +10</button></span>
+            <span class="col-sm-2"><button type="button" class="btn btn-success" onclick="changeColor('green', -10)">Green -10</button></span>
+
+            <span class="col-sm-2"><button type="button" class="btn btn-info" onclick="changeColor('blue', 1)">Blue +1</button></span>
+            <span class="col-sm-2"><button type="button" class="btn btn-info" onclick="changeColor('blue', -1)">Blue -1</button></span>
+            <span class="col-sm-2"><button type="button" class="btn btn-info" onclick="changeColor('blue', 5)">Blue +5</button></span>
+            <span class="col-sm-2"><button type="button" class="btn btn-info" onclick="changeColor('blue', -5)">Blue -5</button></span>
+            <span class="col-sm-2"><button type="button" class="btn btn-info" onclick="changeColor('blue', 10)">Blue +10</button></span>
+            <span class="col-sm-2"><button type="button" class="btn btn-info" onclick="changeColor('blue', -10)">Blue -10</button></span>
+        </div>
+    </body>
+</html>
