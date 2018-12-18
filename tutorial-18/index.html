@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>Template</title>
+
+        <script>
+        // all the inputs are empty for some reason
+        function initialize(){
+          titleElement = document.getElementsByClassName('title')[0];
+          list1Element = document.getElementsByClassName('list 1')[0];
+          list2Element = document.getElementsByClassName('list 2')[0];
+          list3Element = document.getElementsByClassName('list 3')[0];
+          list4Element = document.getElementsByClassName('list 4')[0];
+          list5Element = document.getElementsByClassName('list 5')[0];
+
+          titleInput = document.getElementById('titleInput');
+          item1Input = document.getElementById('item1Input');
+          item2Input = document.getElementById('item2Input');
+          item3Input = document.getElementById('item3Input');
+          item4Input = document.getElementById('item4Input');
+          item5Input = document.getElementById('item5Input');
+        };
+
+        function fillList(element){
+          let change = '';
+          let inputValue = '';
+          switch (element){
+            case 'title': change = titleElement;
+                          inputValue = titleInput.value;
+                          break;
+            case 'list1': change = list1Element;
+                          inputValue = item1Input.value;
+                          break;
+            case 'list2': change = list2Element;
+                          inputValue = item2Input.value;
+                          break;
+            case 'list3': change = list3Element;
+                          inputValue = item3Input.value;
+                          break;
+            case 'list4': change = list4Element;
+                          inputValue = item4Input.value;
+                          break;
+            case 'list5': change = list5Element;
+                          inputValue = item5Input.value;
+                          break;
+          };
+          console.log(titleInput);
+          change.innerHTML = inputValue;
+
+        };
+
+        </script>
+
+        <style>
+        </style>
+    </head>
+
+    <body onload="initialize()">
+      <ul class="wrapper list">
+        <h1 class="title">Undefined</h1>
+        <li class="list 1">undefined</li>
+        <li class="list 2">undefined</li>
+        <li class="list 3">undefined</li>
+        <li class="list 4">undefined</li>
+        <li class="list 5">undefined</li>
+      </ul>
+      <div class="wrapper">
+        Title <input type="text" id="titleInput" value=""> <button type="button" name="button" onclick='fillList("title")'>Submit</button><br /><br />
+        Item 1 <input type="text" id="item1Input" value=""> <button type="button" name="button" onclick='fillList("list1")'>Submit</button><br /><br />
+        Item 2 <input type="text" id="item2Input" value=""> <button type="button" name="button" onclick='fillList("list2")'>Submit</button><br /><br />
+        Item 3 <input type="text" id="item3Input" value=""> <button type="button" name="button" onclick='fillList("list3")'>Submit</button><br /><br />
+        Item 4 <input type="text" id="item4Input" value=""> <button type="button" name="button" onclick='fillList("list4")'>Submit</button><br /><br />
+        Item 5 <input type="text" id="item5Input" value=""> <button type="button" name="button" onclick='fillList("list5")'>Submit</button><br /><br />
+      </div>
+    </body>
+
+</html>

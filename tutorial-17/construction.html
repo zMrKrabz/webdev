@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+  <html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>Tutorial 17</title>
+
+        <script>
+          function initialize(){
+            firstInput = document.getElementById('first');
+            lastInput = document.getElementById('last');
+            greetingOutput = document.getElementById('greeting');
+
+            earthCheck = document.getElementById('earth');
+            marsCheck = document.getElementById('mars');
+            beltCheck = document.getElementById('belt');
+
+            firstName = '';
+            lastName = '';
+          }
+
+          function recordData(){
+            firstName = firstInput.value;
+            lastName = lastInput.value;
+
+            origin = getOrigin();
+            display();
+          }
+
+          function getOrigin(){
+            if(earthCheck.checked) return "Earth";
+            if(marsCheck.checked) return "Mars";
+            if(beltCheck.checked) return "Belt";
+
+            return "nowhere"
+          }
+
+          function display(){
+            greetingOutput.innerHTML = `Hello, ${firstName} ${lastName} from ${origin}`;
+          }
+        </script>
+
+        <style>
+        </style>
+    </head>
+
+    <body onload="initialize();">
+      <h1 id="greeting"></h1>
+      First Name: <input type="text" id="first" />
+      Last Name: <input type="text" id="last" />
+
+      <div>
+        <h3>Place of Origin</h3>
+        <input id='earth' type='checkbox' />Earth<br />
+        <input id='mars' type='checkbox' />Mars<br />
+        <input id='belt' type='checkbox' />The Belt<br />
+
+      </div>
+      <br />
+
+      <button onclick="recordData();">Submit Information</button>
+    </body>
+</html>

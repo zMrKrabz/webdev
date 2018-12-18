@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>Tutorial 12 CONSTRUCTION</title>
+
+        <script>
+            function initialize(){
+                textOutput = document.getElementById("textdiv");
+                fontSizeOutput = document.getElementById("sizeout");
+
+                fSize = 24;
+                display();
+            }
+
+            function display() {
+                fontSizeOutput.innerHTML=fSize;
+                textOutput.style.fontSize = fSize + "pt"
+            }
+        </script>
+        <style>
+            div {
+                font: bold 24px comic sans ms;
+                text-decoration: underline wavy green;
+
+            }
+        </style>
+
+    </head>
+
+    <body onload="initialize()">
+        <div id="textdiv">
+            I am font.
+        </div>
+        <p>
+            <div>Current font size: <span id="sizeout"></span> point</div>
+            <button type="button" onclick="fSize++; display();">Font Size ++</button>
+            <button type="button" onclick="fSize--; display();">Font Size --</button>
+        </p>
+    </body>
+</html>

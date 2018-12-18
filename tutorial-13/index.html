@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>Tutorial 12</title>
+        
+        <script>
+            function initialize(){
+                colorElement = document.getElementById("color");
+                timeElement = document.getElementById("timeTook");
+            };
+
+            function rgb(r, g, b){
+                r = Math.floor(r);
+                g = Math.floor(g);
+                b = Math.floor(b);
+                return ["rgb(",r,",",g,",",b,")"].join("");
+            }
+
+            function guessColor(initRgb){
+                let red = 0;
+                let green = 0;
+                let blue = 0;
+                
+                // 3 while statements to guess if a color 
+                while(!red){
+                    let newRed = Math.floor(Math.random() * 255);
+                    if (newRed === initRgb[0]){
+                        red = newRed;
+                    };
+                };
+                console.log(red);
+
+                while(!green){
+                    let newGreen = Math.floor(Math.random() * 255);
+                    if (newGreen === initRgb[1]){
+                        green = newGreen;
+                    };
+                };
+                console.log(green);
+
+                while(!blue){
+                    let newBlue = Math.floor(Math.random() * 255);
+                    if (newBlue === initRgb[2]){
+                        blue = newBlue;
+                    };
+                };
+                console.log(blue);
+            };
+
+            function main(){
+                initRgb = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)];
+                colorElement.innerHTML=rgb(initRgb[0], initRgb[1], initRgb[2]);
+                colorElement.style.backgroundColor=rgb(initRgb[0], initRgb[1], initRgb[2]);
+
+                let t0 = performance.now();
+                guessColor(initRgb);
+                let t1 = performance.now();
+                timeElement.innerHTML=`${t1-t0}`;
+            }
+        </script>
+
+        <style>
+        </style>
+
+    </head>
+
+    <body onload="initialize();">
+        <button type="button" onclick="main();">Start</button>
+        <p id="pColor">Color: <span id="color"></span></p>
+        <p>Time: <span id="timeTook"></span></p>
+    </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+  <html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>Tutorial 17</title>
+
+        <script>
+          function initialize(){
+            nameInput = document.getElementById('name');
+            feelingInput = document.getElementById('feeling');
+            planetsInput = document.getElementById('planets');
+            greetingOutput = document.getElementById('greeting');
+
+            blueCheck = document.getElementById('blue');
+            redCheck = document.getElementById('red');
+            greenCheck = document.getElementById('green');
+
+            name = '';
+            feeling = '';
+            planets = '';
+          }
+
+          function recordData(){
+            name = nameInput.value;
+            feeling = feelingInput.value;
+            planets = planetsInput.value;
+
+            color = getFavColor();
+            display();
+          };
+
+          function getFavColor(){
+            if(redCheck.checked) return "Red";
+            if(blueCheck.checked) return "Blue";
+            if(greenCheck.checked) return "Green";
+
+            return "nowhere";
+          };
+
+          function display(){
+            greetingOutput.innerHTML = `Hello, ${name}, who's favorite color is ${color} and is feeling ${feeling}. ${name} has visited ${planets}`;
+          }
+        </script>
+
+        <style>
+        </style>
+    </head>
+
+    <body onload="initialize();">
+      <h1 id="greeting"></h1>
+      What is your name?: <input type="text" id="name" /><br /><br />
+      How are you feeling?: <input type="text" id="feeling" /><br /><br />
+      What is your favorite color?
+      <div class="favPrimaryColor">
+        <input id='blue' type='checkbox' />Blue<br />
+        <input id='red' type='checkbox' />Red<br />
+        <input id='yellow' type='checkbox' />Yellow<br />
+      </div><br />
+
+      “What new planets have you visited?”<input id="planets" type='text'>
+      <br />
+
+      <button onclick="recordData();">Submit Information</button>
+    </body>
+</html>
