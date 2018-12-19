@@ -32,17 +32,44 @@
                 let newGreen = 0;
                 let newBlue = 0;
 
+                t0 = performance.now();
+
+                // each while loop is suppose to iterate until it equals the corresponding color
+                // at the end, the background color should be the same as the initialized color
                 while(true){
                   newRed = guessColor();
                   if (newRed === red){
                     break;
                   } else{
                     document.body.style.backgroundColor = rgb(newRed, newGreen, newBlue);
-                    colorElement.innerHTML = rgb(newRed, newBlue, newGreen);
+                    colorElement.innerHTML = rgb(newRed, newGreen, newBlue);
+                  };
+                };
+
+                while(true){
+                  newGreen = guessColor();
+                  if (newGreen === green){
+                    break;
+                  } else{
+                    document.body.style.backgroundColor = rgb(newRed, newGreen, newBlue);
+                    colorElement.innerHTML = rgb(newRed, newGreen, newBlue);
+                  };
+                };
+
+                while(true){
+                  newBlue = guessColor();
+                  if (newBlue === blue){
+                    break;
+                  } else{
+                    document.body.style.backgroundColor = rgb(newRed, newGreen, newBlue);
+                    colorElement.innerHTML = rgb(newRed, newGreen, newBlue);
                   };
                 };
 
                 document.body.style.backgroundColor= rgb(newRed, newGreen, newBlue);
+                tFinal = performance.now() - t0;
+                timeElement.innerHTML = tFinal;
+
             }
         </script>
 
