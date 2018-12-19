@@ -17,8 +17,9 @@
                 r = Math.floor(r);
                 g = Math.floor(g);
                 b = Math.floor(b);
+
                 return ["rgb(",r,",",g,",",b,")"].join("");
-            }
+            };
 
             function main(){
                 let red = Math.floor(255 * Math.random());
@@ -32,18 +33,55 @@
                 let newGreen = 0;
                 let newBlue = 0;
 
-                while(true){
-                  newRed = guessColor();
-                  if (newRed === red){
-                    break;
-                  } else{
-                    document.body.style.backgroundColor = rgb(newRed, newGreen, newBlue);
-                    colorElement.innerHTML = rgb(newRed, newBlue, newGreen);
-                  };
+                let t0 = performance.now();
+
+                let guessRed = () => {
+                  setTimeout(() => {
+                    newRed = guessColor();
+                    if (newRed === red){
+                      guessGreen();
+                    } else{
+                      document.body.style.backgroundColor = rgb(newRed, newGreen, newBlue);
+                      colorElement.innerHTML = rgb(newRed, newGreen, newBlue);
+                      guessRed();
+                    };
+                  }, 10);
                 };
 
-                document.body.style.backgroundColor= rgb(newRed, newGreen, newBlue);
-            }
+                  let guessGreen = () => {
+                    setTimeout(() => {
+                      newGreen = guessColor();
+                      if (newGreen === green){
+                        guessBlue();
+                      } else{
+                        document.body.style.backgroundColor = rgb(newRed, newGreen, newBlue);
+                        colorElement.innerHTML = rgb(newRed, newGreen, newBlue);
+                        guessGreen();
+                      };
+                    }, 10);
+                  };
+
+                    let guessBlue = () => {
+                      setTimeout(() => {
+                        newBlue = guessColor();
+                        if (newBlue === blue){
+                          updateFinal();
+                        } else{
+                          document.body.style.backgroundColor = rgb(newRed, newGreen, newBlue);
+                          colorElement.innerHTML = rgb(newRed, newGreen, newBlue);
+                          guessBlue();
+                        };
+                      }, 10);
+                    };
+
+                    function updateFinal(){
+                        document.body.style.backgroundColor = rgb(newRed, newGreen, newBlue);
+                        colorElement.innerHTML = rgb(newRed, newGreen, newBlue);
+                        let tFinal = performance.now() - t0;
+                        timeElement.innerHTML = tFinal;
+                      };
+                    guessRed();
+                  };
         </script>
 
         <style>
