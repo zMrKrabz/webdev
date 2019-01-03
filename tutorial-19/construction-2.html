@@ -4,16 +4,70 @@
     <head>
         <meta charset="utf-8">
 
-        <title>Template</title>
+        <title>Tutorial-19-2</title>
 
         <script>
+            function getRandomInteger(lesserInt, greaterInt){
+                return Math.floor(Math.random() * greaterInt) + lesserInt;
+            };
+
+            function initialize(){
+                rollsSoFar = 0;
+                dicetable = document.getElementById("dicetable");
+            };
+
+            function rollDice(numRolls){
+                for (let i = 0; i < numRolls; i++){
+                    let diceroll = getRandomInteger(1, 6);
+                    let newRow = dicetable.insertRow();
+                    let newCell = newRow.insertCell();
+                    newCell.innerHTML = "Roll " + (rollsSoFar + 1);
+
+                    newCell = newRow.insertCell();
+                    newCell.innerHTML = diceroll;
+                    rollsSoFar++;
+                };
+            };
+
+            function main(){
+                let numRolls = document.getElementById("numRolls").value;
+                
+                rollDice(numRolls);
+                console.log(rollsSoFar);
+                
+            };
         </script>
 
         <style>
+            table {
+                border: thick solid grey;
+                border-collapse: collapse;
+                widows: 25%;
+            }
+
+            th, td {
+                border: thin solid black;
+                padding: 8px;
+                width: 50%;
+            }
         </style>
 
     </head>
 
-    <body>
+    <body onload="initialize();">
+        Insert Number of rolls <input id="numRolls" type="text" /> <button onclick="main();">Roll Die</button>
+        <table id="dicetable">
+            <tr>
+                <th>Roll</th>
+                <th>Result</th>
+            </tr>
+        </table>
+
+        <table id="numCount">
+            <tr>
+                <th>Number</th>
+                <th>Rolls</th>
+            </tr>
+        </table>
     </body>
 </html>
