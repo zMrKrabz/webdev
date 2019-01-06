@@ -1,0 +1,79 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.header {
+    flex-direction: row;
+    align-self: stretch;
+    justify-content: space-around;
+    background-color: aqua;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+button {
+    align-self: center;
+    text-align: center;
+    background-color: antiquewhite;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+button:hover,
+button:focus{
+    background: whitesmoke;
+}
+
+button:focus {
+    outline: 1% solid #fff;
+    outline-offset: 4%;
+}
+
+button:active {
+    transform: scale(0.99);
+}
+
+.generateFighter {
+    flex-direction: row;
+    background-color: orange;
+    align-self: stretch;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+}
+
+.fighterArea {
+    background-image: '../../project-2/images/nature-forest-trees-fog.jpeg';
+    flex-direction: column;
+    background-color: #fff;
+    padding: 10px;
+    justify-items: center;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.stats {
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+    padding: 10px 10px;
+}
+
+.startBattle{
+    align-content: flex-end;
+    justify-content: center;
+    background-color: orange;
+    padding: 5%;
+}
+
+.main {
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.character-image {
+    width: 200px;
+    height: 300px;
+}
