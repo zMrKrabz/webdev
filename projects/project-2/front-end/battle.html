@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>Start Battle</title>
+        
+        <script src='../js/battle.js'></script>
+        <script src='../js/startBattle.js'></script>
+
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+    </head>
+
+    <body onload='initialize();'>
+        <div class='container main'>
+            <div class="container header">
+                <button>How to play</button>
+                <p class='title'>One on One Fighter</p>
+                <button onclick="restart();">Restart</button>
+            </div>
+            <div class='container fighter-arena'>
+                <div class='contianer character'>
+                    <p class='name-tag'>You</p>
+                    <img src='../images/160895.jpg' class='character-image'>
+                    <div class='container stats'>
+                        <p>Strength: <span id='characterStrengthStat'></span></p>
+                        <p>Cunning: <span id='characterCunningStat'></span></p>
+                        <p>Speed: <span id='characterSpeedStat'></span></p>
+                        <p>Fatigue: <span id='characterFatigueStat'></span></p>
+                    </div>
+                </div>
+                <div class='container actions'>
+                    <button class='btn-action btn-attack' onclick='play("attack")'>Attack</button>
+                    <button class='btn-action btn-defend' onclick='play("defend")'>Defend</button>
+                    <button class='btn-action btn-finisher' id='btn-finisher' onclick='play("finisher")'>Finisher</button>
+                </div>
+                <div class='container opponent'>
+                    <p class='name-tag'>Goblin</p>
+                    <img src='../images/goblin-1.jpg' class='character-image'>
+                    <div class='container stats'>
+                        <p>Strength: <span id='opponent-strength-stat'></span></p>
+                        <p>Cunning: <span id='opponent-cunning-stat'></span></p>
+                        <p>Speed: <span id='opponent-speed-stat'></span></p>
+                        <p>Fatigue: <span id='opponent-fatigue-stat'></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='container log'>
+            <p id='log'>Console</p>
+        </div>
+    </body>
+</html>

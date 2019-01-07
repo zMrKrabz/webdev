@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald|ZCOOL+KuaiLe');
+
 .container {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-content: space-around;
 }
 
 .header {
@@ -47,7 +50,7 @@ button:active {
 }
 
 .fighterArea {
-    background-image: '../../project-2/images/nature-forest-trees-fog.jpeg';
+    background-image: '../images/nature-forest-trees-fog.jpeg';
     flex-direction: column;
     background-color: #fff;
     padding: 10px;
@@ -59,7 +62,7 @@ button:active {
     flex-direction: column;
     background-color: #fff;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
-    padding: 10px 10px;
+    padding: 5px 5px;
 }
 
 .startBattle{
@@ -67,6 +70,7 @@ button:active {
     justify-content: center;
     background-color: orange;
     padding: 5%;
+    visibility: hidden;
 }
 
 .main {
@@ -76,4 +80,42 @@ button:active {
 .character-image {
     width: 200px;
     height: 300px;
+}
+
+.fighter-arena {
+    flex-direction: row;
+}
+
+.actions {
+    align-content: flex-end;
+    flex-direction: row;
+}
+
+.name-tag {
+    font-family: 'Oswald', sans-serif; 
+    font-size: 20px;
+    justify-content: center;
+    color: gold;
+    background-color: black;
+    padding: 4px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.title {
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: 25px;
+}
+
+.btn-finisher {
+    visibility: hidden;
+}
+
+.log {
+    padding: 10px;
+    background-color: white;
+    color: black;
+    align-content: flex-start;
+    flex-direction: row;
 }

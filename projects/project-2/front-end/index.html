@@ -7,7 +7,8 @@
         <title>One on One Fighter</title>
 
         <link rel="stylesheet" type="text/css" href="style.css">
-        <script src="../../project-2/js/generateCharacter.js"></script>
+        <script src="../js/generateCharacter.js"></script>
+        <script src="../js/startBattle.js"></script>
 
     </head>
 
@@ -21,7 +22,7 @@
             <div class="container generateFighter">
                 <div class="fighterArea">
                     <button onclick="newCharacter();">Generate Your Fighter!</button>
-                    <p><img src='../../project-2/images/160895.jpg' class='character-image'></p>
+                    <p><img src='../images/160895.jpg' class='character-image'></p>
                 </div>
                 <div class="stats">
                     <p>Strength: <span id="strengthStat"> </span></p>
@@ -31,7 +32,7 @@
                 </div>
             </div>
             <div class="container startBattle">
-                <button class="btn-start">Start Battle!</button>
+                <button class="btn-start" id='btn-start' onclick="startBattle();">Start Battle!</button>
             </div>
         </div>
     </body>

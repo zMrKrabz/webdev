@@ -4,7 +4,7 @@ let characterObj = () => {
         strength: 12,
         cunning: 12,
         speed: 12,
-        fatigue: 12 
+        fatigue: 30
     };
 
     return charObj;
@@ -26,28 +26,28 @@ function shuffle(array) {
 };
 
 function modifyCharacter() {
-    let character = characterObj();
-    let keys = Object.keys(character);
+    let newCharacter = characterObj();
+    let keys = Object.keys(newCharacter);
     let shuffledArr = shuffle(keys);
 
     for (i in shuffledArr){
         if (i<=1){
             if (shuffledArr[i] === 'fatigue') {
-                character[shuffledArr[i]] += genRandNum(6);
+                newCharacter[shuffledArr[i]] += genRandNum(6);
             } else{
-                character[shuffledArr[i]] += genRandNum(6);
+                newCharacter[shuffledArr[i]] += genRandNum(6);
             };
         };
         if (i>1){
             if (shuffledArr[i] === 'fatigue') {
-                character[shuffledArr[i]] -= genRandNum(6);
+                newCharacter[shuffledArr[i]] -= genRandNum(6);
             } else{
-                character[shuffledArr[i]] -= genRandNum(6);
+                newCharacter[shuffledArr[i]] -= genRandNum(6);
             };
         };
     };
 
-    return character;
+    return newCharacter;
 };
 
 function newCharacter() {
@@ -62,4 +62,8 @@ function newCharacter() {
     cunningStatElement.innerHTML=character.cunning;
     speedStatElement.innerHTML=character.speed;
     fatigueStatElement.innerHTML=character.fatigue;
+
+    sessionStorage.setItem('character', JSON.stringify(character));
+    let startButton = document.getElementById('btn-start');
+    startButton.style.visibility='visible';
 };
