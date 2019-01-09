@@ -16,7 +16,7 @@
     <body onload='initialize();'>
         <div class='container main'>
             <div class="container header">
-                <button>How to play</button>
+                <button onclick="window.location.href='how-to-play.html'">How to play</button>
                 <p class='title'>One on One Fighter</p>
                 <button onclick="restart();">Restart</button>
             </div>
@@ -32,8 +32,8 @@
                     </div>
                 </div>
                 <div class='container actions'>
-                    <button class='btn-action btn-attack' onclick='play("attack")'>Attack</button>
-                    <button class='btn-action btn-defend' onclick='play("defend")'>Defend</button>
+                    <button class='btn-action btn-attack' onclick='attack();'>Attack</button>
+                    <button class='btn-action btn-defend' onclick='defend();'>Defend</button>
                     <button class='btn-action btn-finisher' id='btn-finisher' onclick='play("finisher")'>Finisher</button>
                 </div>
                 <div class='container opponent'>

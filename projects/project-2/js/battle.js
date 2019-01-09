@@ -1,199 +1,31 @@
-let oppStrengthElement, oppCunningElement, oppSpeedElement, oppFatigueElement;
-let characterStrengthElement, characterCunningElement, characterSpeedElement, characterFatigueElement;
-let finisherBtn;
-let player = JSON.parse(sessionStorage.getItem('character'));
-let opponents = [];
-let currentOpponent = 0;
+// here is useless stuff
+let genRandNum = (maxNum) => Math.floor(Math.random()*maxNum);
 
-function initialize(){
-    oppStrengthElement = document.getElementById('opponent-strength-stat');
-    oppCunningElement = document.getElementById('opponent-cunning-stat');
-    oppSpeedElement = document.getElementById('opponent-speed-stat');
-    oppFatigueElement = document.getElementById('opponent-fatigue-stat');
+let characterObj = () => {
 
-    characterStrengthElement = document.getElementById('characterStrengthStat');
-    characterCunningElement = document.getElementById('characterCunningStat');
-    characterSpeedElement = document.getElementById('characterSpeedStat');
-    characterFatigueElement = document.getElementById('characterFatigueStat');
-
-    log = document.getElementById('log');
-
-    finisherBtn = document.getElementById('btn-finisher');
-    for (let i=0;i<3;i++){
-        opponents.push(modifyCharacter());
+    let obj = {
+        strength: 12,
+        cunning: 12,
+        speed: 12,
+        fatigue: 30
     };
 
-    // Make sure fatigue doesnt rise above 0
-    playerOriginalFatigue = player.fatigue;
-    opponentOriginalFatigue = opponents[currentOpponent].fatigue;
-
-    check();
+    return obj;
 };
 
-function check(){
-    if (player.fatigue > playerOriginalFatigue){
-        player.fatigue = playerOriginalFatigue
-    };
-    if (opponents[currentOpponent].fatigue > opponentOriginalFatigue){
-        opponents[currentOpponent].fatigue = opponentOriginalFatigue;
-    };
+let character;
 
-    characterStrengthElement.innerHTML=player.strength
-    characterCunningElement.innerHTML=player.cunning;
-    characterSpeedElement.innerHTML=player.speed;
-    characterFatigueElement.innerHTML=player.fatigue;
-
-    oppStrengthElement.innerHTML=opponents[currentOpponent].strength;
-    oppCunningElement.innerHTML=opponents[currentOpponent].cunning;
-    oppSpeedElement.innerHTML=opponents[currentOpponent].speed;
-    oppFatigueElement.innerHTML=opponents[currentOpponent].fatigue;
-
-    if (player.fatigue*2===opponents[currentOpponent].fatigue){
-        finisherBtn.style.visibilility='visible';
+function shuffle(array) {
+    let j, x, i;
+    for (i = array.length -1; i> 0; i--){
+        j = genRandNum(i + 1);
+        x = array[i];
+        array[i] = array[j];
+        array[j] = x;
     };
+    return array;
 };
 
-function attack(person){
-    let damage;
-    if (person === 'player'){
-        damage = (player.strength + player.speed + player.cunning)/(genRandNum(6));
-    }else {
-        damage = (opponents[currentOpponent].strength + opponents[currentOpponent].speed + opponents[currentOpponent].cunning)/(genRandNum(6));
-    };
-
-    return damage;
-};
-
-function defend(person){
-    let defense;
-    if (person === 'player'){
-        defense = player.speed + player.cunning;
-    }else {
-        defense = opponents[currentOpponent].speed + opponents[currentOpponent].cunning;
-    };
-
-    return defend;
-};
-
-function getBotAction(){
-    let botActions = ['attack', 'defend'];
-    if (player.fatigue*2<=opponents[currentOpponent].fatigue){
-        return 'finisher';
-    }else {
-        return botActions[Math.floor(Math.random()*2)]
-    };
-};
-
-// happens every turn. The action is the action submitted by the player
-function play(action){
-    let defense = player.speed + genRandNum(6);
-
-    function attackAction(){
-        let damage = attack('player');
-        let botAction = getBotAction();
-        
-        if (botAction === 'attack'){
-            let botDamage = attack('bot');
-            if ((botDamage - defense) > 0){
-                player.fatigue -= botDamage - defense;
-            };
-            if ((damage - opponents[currentOpponent].defense) > 0){
-                opponents[currentOpponent].fatigue -= damage - opponents[currentOpponent].defense;
-            };
-        };
-
-        if (botAction === 'defend'){
-            let botDefense = defend('bot');
-            // If a fighter defends and does not take damage on that turn, it will recover 1-6 random fatigue points.
-            // Fatigue may never rise above the original level, but may go below 0.
-            if ((damage - botDefense) > 0){
-                opponents[currentOpponent].fatigue -= botDamage - defense;
-            }else {
-                opponents[currentOpponent].fatigue += genRandNum(6);
-                if (opponents[currentOpponent].fatigue > opponentOriginalFatigue){
-                    opponents[currentOpponent].fatigue = opponentOriginalFatigue
-                };
-            };
-        };
-
-        // A Finishing Move is a standard attack, but Cunning is not calculated into the formula.
-        if (botAction === 'finisher'){
-            let finisher = attack('bot') - opponents[currentOpponent].cunning;
-            if (finisher > player.defense){
-                log.innerHTML='<p>The bot has won</p>' + log.innerHTML;
-            } else{
-                if (damage > opponents[currentOpponent].defense){
-                    opponents[currentOpponent].fatigue -= damage > opponents[currentOpponent].defense;
-                };
-            };
-        };
-    };
-
-    function defendAction(){
-        // need to add regain fatigue
-        let defense = defend('player');
-        let botAction = getBotAction();
-        
-        if (botAction === 'attack'){
-            let botDamage = attack('bot');
-            if ((botDamage - defense) > 0){
-                player.fatigue -= botDamage - defense;
-            };
-        };
-
-        if (botAction === 'defend'){
-            opponents[currentOpponent].fatigue += genRandNum(6);
-            player.fatigue += genRandNum(6);
-        };
-
-        // A Finishing Move is a standard attack, but Cunning is not calculated into the formula.
-        if (botAction === 'finisher'){
-            let finisher = attack('bot') - opponents[currentOpponent].cunning;
-            if (finisher > defense){
-                log.innerHTML='<p>The bot has won</p>' + log.innerHTML;
-            };
-        };
-    };
-
-    function finisherAction(){
-        let finisher = attack('player') - player.cunning;
-        let botAction = getBotAction();
-        
-        if (botAction === 'attack'){
-            let botDamage = attack('bot');
-            if ((botDamage - player.defense) > 0){
-                player.fatigue -= botDamage - player.defense;
-            };
-            if ((damage - opponents[currentOpponent].defense) > 0){
-                opponents[currentOpponent].fatigue -= damage - opponents[currentOpponent].defense;
-            };
-        };
-
-        if (botAction === 'defend'){
-            opponents[currentOpponent].fatigue += genRandNum(6);
-        };
-
-        // A Finishing Move is a standard attack, but Cunning is not calculated into the formula.
-        if (botAction === 'finisher'){
-            let botFinisher = attack('bot') - opponents[currentOpponent].cunning;
-            if (botFinisher > player.defense){
-                log.innerHTML='<p>The bot has won</p>' + log.innerHTML;
-            };
-        } else{
-            if (finisher){
-                log.innerHTML='<p>The player has won</p>' + log.innerHTML;
-            };
-        };
-    };
-
-    switch (action){
-        case 'attack': attackAction();
-        case 'defend': defendAction();
-        case 'finisher': finisherAction();
-    };
-};
-
-// improve this by just exporting out of generateCharacter.js please
 function modifyCharacter() {
     let newCharacter = characterObj();
     let keys = Object.keys(newCharacter);
@@ -219,28 +51,217 @@ function modifyCharacter() {
     return newCharacter;
 };
 
-let characterObj = () => {
+function newCharacter() {
+    character = modifyCharacter();
 
-    let charObj = {
-        strength: 12,
-        cunning: 12,
-        speed: 12,
-        fatigue: 30
-    };
+    const strengthStatElement = document.getElementById('strengthStat');
+    const cunningStatElement = document.getElementById('cunningStat');
+    const speedStatElement = document.getElementById('speedStat');
+    const fatigueStatElement = document.getElementById('fatigueStat');
 
-    return charObj;
+    strengthStatElement.innerHTML=character.strength;
+    cunningStatElement.innerHTML=character.cunning;
+    speedStatElement.innerHTML=character.speed;
+    fatigueStatElement.innerHTML=character.fatigue;
+
+    sessionStorage.setItem('character', JSON.stringify(character));
+    let startButton = document.getElementById('btn-start');
+    startButton.style.visibility='visible';
+};
+// end of copy paste
+
+// How is the bot getting infinity damage when attacking
+
+let oppStrengthElement, oppCunningElement, oppSpeedElement, oppFatigueElement;
+let characterStrengthElement, characterCunningElement, characterSpeedElement, characterFatigueElement;
+let finisherBtn;
+let player = JSON.parse(sessionStorage.getItem('character'));
+let opponent = modifyCharacter();
+let currentOpponent = 0;
+
+function initialize(){
+    opponent.strengthElement = document.getElementById('opponent-strength-stat');
+    opponent.cunningElement = document.getElementById('opponent-cunning-stat');
+    opponent.speedElement = document.getElementById('opponent-speed-stat');
+    opponent.fatigueElement = document.getElementById('opponent-fatigue-stat');
+
+    player.strengthElement = document.getElementById('characterStrengthStat');
+    player.cunningElement = document.getElementById('characterCunningStat');
+    player.speedElement = document.getElementById('characterSpeedStat');
+    player.fatigueElement = document.getElementById('characterFatigueStat');
+
+    log = document.getElementById('log');
+
+    finisherBtn = document.getElementById('btn-finisher');
+
+    // Make sure fatigue doesnt rise above 0
+    player.originalFatigue = player.fatigue;
+    opponent.originalFatigue = opponent.fatigue;
+
+    check();
 };
 
-function shuffle(array) {
-    let j, x, i;
-    for (let i = array.length -1; i> 0; i--){
-        j = genRandNum(i + 1);
-        x = array[i];
-        array[i] = array[j];
-        array[j] = x;
+function check(){
+    console.log(opponent, player);
+    
+    if (player.fatigue > player.originalFatigue){
+        console.log('h');
+        
+        player.fatigue = player.originalFatigue;
     };
-    return array;
+
+    if (opponent.fatigue > opponent.originalFatigue){
+        opponent.fatigue = opponent.originalFatigue;
+    };
+
+    player.strengthElement.innerHTML=player.strength
+    player.cunningElement.innerHTML=player.cunning;
+    player.speedElement.innerHTML=player.speed;
+    player.fatigueElement.innerHTML=player.fatigue;
+
+    opponent.strengthElement.innerHTML=opponent.strength;
+    opponent.cunningElement.innerHTML=opponent.cunning;
+    opponent.speedElement.innerHTML=opponent.speed;
+    opponent.fatigueElement.innerHTML=opponent.fatigue;
+
+    if (player.fatigue*2===opponent.fatigue){
+        finisherBtn.style.visibilility='visible';
+    };
 };
 
-let genRandNum = (maxNum) => Math.floor(Math.random()*maxNum);
-// all of the above is not really needed
+function getBotAction(){
+    let botActions = ['attack', 'defend'];
+    if (player.fatigue*2<=opponent.fatigue){
+        return 'finisher';
+    }else {
+        return botActions[Math.floor(Math.random()*2)]
+    };
+};
+
+function attack(){
+    let damage = (player.strength + player.speed + player.cunning)/(genRandNum(6));
+    let defense = player.speed + genRandNum(6);
+    console.log(`Player damage of ${damage} and defense of ${defense}`);
+    
+
+    let botAction = getBotAction();
+    if (botAction === 'attack'){
+        let botAttack = (opponent.strength + opponent.speed + opponent.cunning)/genRandNum(6);
+        console.log(botAttack);
+        
+        let botDefense = opponent.speed + genRandNum(6);
+        console.log(`Bot damage of ${botAttack} and defense of ${botDefense}`);
+        
+        if (attack - botDefense > 0){
+            let playerDealtDamage = damage - botDefense;
+            opponent.fatigue -= playerDealtDamage;
+            console.log(`Player has dealt ${playerDealtDamage} damage`);
+        };
+        if (botAttack - defense > 0){
+            let botDealtDamage = botAttack - defense;
+            player.fatigue -= botDealtDamage;
+            console.log(`Bot has done ${botDealtDamage} damage`);
+        };
+    };
+
+    if (botAction === 'defend'){
+        let botDefense = opponent.speed + opponent.cunning;
+        console.log(`Bot defense of ${botDefense}`);
+        
+        if (damage - botDefense > 0){
+            let playerDealtDamage = damage - botDefense;
+            opponent.fatigue -= playerDealtDamage;
+        };
+        opponent.fatigue += genRandNum(6);
+    };
+
+    if (botAction === 'finisher'){
+        let botDefense = opponent.speed + genRandNum(6);
+        let botFinisher = opponent.strength + opponent.speed;
+
+        if (botFinisher > defense){
+            console.log('The bot has won the game');
+        };
+
+        if (damage - botDefense > 0){
+            console.log(`Player will do ${damage - botDefense}`);
+            opponent.fatigue -= damage - botDefense;
+        };
+    };
+    check();
+};
+
+function defend(){
+    let defense = player.speed + player.cunning;
+    let botAction = getBotAction();
+
+    if (botAction === 'attack'){
+        // bot will attempt to attack
+        let botAttack = (opponent.strength + opponent.speed + opponent.cunning)/genRandNum(6);
+        console.log(botAttack);
+        
+        let botDealtDamage = botAttack - defense;
+        console.log(`Bot will attempt to do ${botDealtDamage}`);
+        
+        if (botDealtDamage > 0){
+            player.fatigue -= botDealtDamage;
+        };
+    };
+
+    if (botAction === 'defend'){
+        // nothing will happen, since both are defending. Just gains fatigue
+        console.log('Both are in defense');
+        botAction.fatigue += genRandNum(6);
+    };
+
+    if (botAction === 'finisher'){
+        let botFinisher = opponent.strength + opponent.speed;
+        if (botFinisher - defense > 0){
+            console.log('bot has won');
+        };
+    };
+
+    player.fatigue += genRandNum(6);
+    check();
+};
+
+function finisher(){
+    let damage = player.strength + player.speed;
+    let defense = player.speed + genRandNum(6);
+    let botAction = botAction();
+
+    if (botAction === 'attack'){
+        let botAttack = (opponent.strength + opponent.speed + opponent.cunning)/genRandNum(6);
+        console.log(`Bot can do ${botAttack} damage`);
+        
+        if (botAttack - defense > 0){
+            player.fatigue -= botAttack - defense;
+        };
+
+        if (damage - defense > 0){
+            console.log('Player has won');
+        };
+    };
+
+    if (botAction === 'defend'){
+        let botDefense = opponent.speed + opponent.cunning;
+        console.log(`Bot defense of ${botDefense}`);
+        
+        if (damage > botDefense){
+            console.log('Player has won');
+        };
+    };
+
+    if (botAction === 'finisher'){
+        let botFinisher = opponent.strength + opponent.speed;
+        let botDefense = opponent.speed + opponent.cunning;
+
+        if (botFinisher > defense){
+            console.log(`Bot has won`);
+        };
+
+        if (damage > botDefense){
+            console.log(`Player has won`);
+        };
+    };
+};

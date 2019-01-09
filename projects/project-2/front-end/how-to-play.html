@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>How to play</title>
+        
+        <script src='../js/startBattle.js'></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+        <style>
+        </style>
+
+    </head>
+
+    <body>
+        <div class="contianer main">
+            <div class="container header">
+                <button onclick="window.location.href='how-to-play.html'">How to play</button>
+                <p class='title'>One on One Fighter</p>
+                <button onclick="restart();">Restart</button>
+            </div>
+            <div class="container how-to-play">
+                    Each fighter is defined by 4 numerical values: <br />
+                    ●	Strength - used for attacks<br />
+                    ●	Cunning - used for attack and defense<br />
+                    ●	Speed - used for defense<br />
+                    ●	Fatigue - used to determine how close a fighter is to being knocked out.<br />
+                    Each fighter begins with strength, cunning, and speed at values of 12, and a fatigue of 30.<br />
+                    Before the fight begins, the computer will generate two new fighters, altering the base values in the following way:<br />
+                    ●	It will choose 2 values to increase and 2 values to decrease.<br />
+                    ●	It will modify strength, speed, and cunning each by a random number from 0 to 3.<br />
+                    ●	It will modify fatigue by a random number between 0 and 6.<br />
+                    The modified values should be considered the original values for each fighter.<br />
+                    During the round, each fighter must select whether to attack or defend.  Under certain circumstances, a fighter can also attempt a finishing move.  The user will choose by clicking a button.  The computer will choose to attack or defend randomly unless it has the finishing move available.  Then it will always choose the finishing move.<br />
+                    When a fighter attacks, it’s attack value is determined by the following:<br />
+                    Attack Value = (Strength + Speed  + Cunning) / Random Integer from 1 to 6<br />
+                    This attack value is compared to the opponent's Defense Value.  The Defense Value is determined by one of the following formula<br />
+                    If Defending…<br />
+                    Defense Value = (Speed + Cunning)<br />
+                    If NOT Defending<br />
+                    Defense Value = Speed + Random Integer from 1 to 6.<br />
+                    If the attack value is greater than the defense value, the opponent's fatigue is reduced by the difference.<br />
+                    Since both fighters are choosing to attack or defend at the same time, the moves are simultaneous.  The results of each attack must be calculated before the final changes are made to the fighters.<br />
+                    If a fighter defends and does not take damage on that turn, it will recover 1-6 random fatigue points.  Fatigue may never rise above the original level, but may go below 0.<br />
+                    If both players defend, then each gets a random number of fatigue points (1 - 6) back.<br />
+                    Update the display accordingly.  All current and original values for both fighters must be visible on screen at all times.<br />
+                    In addition to Attack and Defend a player may attempt a Finishing Move under two conditions.<br />
+                    ●	If one fighter's fatigue is at least double the other fighter's fatigue, it may attempt a Finishing Move.  <br />
+                    ●	If a fighter's fatigue is below zero, its opponent may attempt a Finishing Move.<br />
+                    A Finishing Move is a standard attack, but Cunning is not calculated into the formula.  If it succeeds (would do more than 1 damage), the fighter performing the Finishing Move is the winner and the fight ends.<br />
+                    The Finishing Move option should only appear in the menu if a fighter is in a position to perform that action.  Otherwise, the fighter will only be able to attack and defend.  This may change multiple times during the fight.<br />
+            </div>
+            <button onclick="window.location.href='index.html'">Back to play</button>
+        </div>
+    </body>
+</html>
