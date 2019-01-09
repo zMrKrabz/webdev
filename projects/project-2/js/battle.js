@@ -1,5 +1,5 @@
 // here is useless stuff
-let genRandNum = (maxNum) => Math.floor(Math.random()*maxNum);
+let genRandNum = (maxNum) => Math.floor(Math.random()* (maxNum-1+1))+1;
 
 let characterObj = () => {
 
@@ -105,8 +105,6 @@ function check(){
     console.log(opponent, player);
     
     if (player.fatigue > player.originalFatigue){
-        console.log('h');
-        
         player.fatigue = player.originalFatigue;
     };
 
@@ -124,8 +122,8 @@ function check(){
     opponent.speedElement.innerHTML=opponent.speed;
     opponent.fatigueElement.innerHTML=opponent.fatigue;
 
-    if (player.fatigue*2===opponent.fatigue){
-        finisherBtn.style.visibilility='visible';
+    if (player.fatigue>=opponent.fatigue*2){
+        finisherBtn.style.visibility='visible';
     };
 };
 
@@ -142,6 +140,8 @@ function attack(){
     let damage = (player.strength + player.speed + player.cunning)/(genRandNum(6));
     let defense = player.speed + genRandNum(6);
     console.log(`Player damage of ${damage} and defense of ${defense}`);
+    log.innerHTML=`Player damage of ${damage} and defense of ${defense}<br />` + log.innerHTML;
+
     
 
     let botAction = getBotAction();
@@ -151,22 +151,28 @@ function attack(){
         
         let botDefense = opponent.speed + genRandNum(6);
         console.log(`Bot damage of ${botAttack} and defense of ${botDefense}`);
+        log.innerHTML=`Bot damage of ${botAttack} and defense of ${botDefense}<br />` + log.innerHTML;
         
         if (attack - botDefense > 0){
             let playerDealtDamage = damage - botDefense;
             opponent.fatigue -= playerDealtDamage;
             console.log(`Player has dealt ${playerDealtDamage} damage`);
+            log.innerHTML=`Player has dealt ${playerDealtDamage} damage<br />` + log.innerHTML;
         };
         if (botAttack - defense > 0){
             let botDealtDamage = botAttack - defense;
             player.fatigue -= botDealtDamage;
             console.log(`Bot has done ${botDealtDamage} damage`);
+            log.innerHTML=`Bot has done ${botDealtDamage} damage<br />` + log.innerHTML;
+
         };
     };
 
     if (botAction === 'defend'){
         let botDefense = opponent.speed + opponent.cunning;
         console.log(`Bot defense of ${botDefense}`);
+        log.innerHTML=`Bot defense of ${botDefense}<br />` + log.innerHTML;
+
         
         if (damage - botDefense > 0){
             let playerDealtDamage = damage - botDefense;
@@ -181,10 +187,13 @@ function attack(){
 
         if (botFinisher > defense){
             console.log('The bot has won the game');
+            window.location.href='../front-end/bot-win.html'
         };
 
         if (damage - botDefense > 0){
             console.log(`Player will do ${damage - botDefense}`);
+            log.innerHTML=`Player will do ${damage - botDefense}<br />` + log.innerHTML;
+
             opponent.fatigue -= damage - botDefense;
         };
     };
@@ -199,9 +208,14 @@ function defend(){
         // bot will attempt to attack
         let botAttack = (opponent.strength + opponent.speed + opponent.cunning)/genRandNum(6);
         console.log(botAttack);
+        log.innerHTML=botAttack + '<br />' + log.innerHTML;
+
         
         let botDealtDamage = botAttack - defense;
         console.log(`Bot will attempt to do ${botDealtDamage}`);
+        log.innerHTML=`Bot will attempt to do ${botDealtDamage}` + log.innerHTML;
+
+        
         
         if (botDealtDamage > 0){
             player.fatigue -= botDealtDamage;
@@ -211,6 +225,9 @@ function defend(){
     if (botAction === 'defend'){
         // nothing will happen, since both are defending. Just gains fatigue
         console.log('Both are in defense');
+        log.innerHTML='Both are in defense<br />' + log.innerHTML;
+
+        
         botAction.fatigue += genRandNum(6);
     };
 
@@ -218,6 +235,9 @@ function defend(){
         let botFinisher = opponent.strength + opponent.speed;
         if (botFinisher - defense > 0){
             console.log('bot has won');
+            log.innerHTML='bot has won' + log.innerHTML;
+
+            window.location.href='../front-end/bot-win.html'
         };
     };
 
@@ -228,11 +248,13 @@ function defend(){
 function finisher(){
     let damage = player.strength + player.speed;
     let defense = player.speed + genRandNum(6);
-    let botAction = botAction();
+    let botAction = getBotAction();
 
     if (botAction === 'attack'){
         let botAttack = (opponent.strength + opponent.speed + opponent.cunning)/genRandNum(6);
         console.log(`Bot can do ${botAttack} damage`);
+        log.innerHTML=`Bot can do ${botAttack} damage<br />` + log.innerHTML;
+
         
         if (botAttack - defense > 0){
             player.fatigue -= botAttack - defense;
@@ -240,15 +262,20 @@ function finisher(){
 
         if (damage - defense > 0){
             console.log('Player has won');
+            window.location.href='../front-end/player-win.html';;
         };
     };
 
     if (botAction === 'defend'){
         let botDefense = opponent.speed + opponent.cunning;
         console.log(`Bot defense of ${botDefense}`);
+        log.innerHTML=`Bot defense of ${botDefense}<br />` + log.innerHTML;
+
         
         if (damage > botDefense){
             console.log('Player has won');
+            window.location.href='../front-end/player-win.html';
+
         };
     };
 
@@ -258,10 +285,12 @@ function finisher(){
 
         if (botFinisher > defense){
             console.log(`Bot has won`);
+            window.location.href='../front-end/bot-win.html'
         };
 
         if (damage > botDefense){
             console.log(`Player has won`);
+            window.location.href='../front-end/player-win.html'
         };
     };
 };
