@@ -14,13 +14,14 @@
     </head>
 
     <body onload='initialize();'>
-        <div class='container main'>
+        <div class='container main arena'>
             <div class="container header">
                 <button onclick="window.location.href='how-to-play.html'">How to play</button>
                 <p class='title'>One on One Fighter</p>
                 <button onclick="restart();">Restart</button>
             </div>
             <div class='container fighter-arena'>
+                <!--Container for the user-->
                 <div class='contianer character'>
                     <p class='name-tag'>You</p>
                     <img src='../images/160895.jpg' class='character-image'>
@@ -31,11 +32,13 @@
                         <p>Fatigue: <span id='characterFatigueStat'></span></p>
                     </div>
                 </div>
+                <!--The container with the actions buttons-->
                 <div class='container actions'>
                     <button class='btn-action btn-attack' onclick='attack();'>Attack</button>
                     <button class='btn-action btn-defend' onclick='defend();'>Defend</button>
                     <button class='btn-action btn-finisher' id='btn-finisher' onclick='finisher();'>Finisher</button>
                 </div>
+                <!--Container with the elements of the opponent-->
                 <div class='container opponent'>
                     <p class='name-tag'>Goblin</p>
                     <img src='../images/goblin-1.jpg' class='character-image'>
@@ -49,7 +52,8 @@
             </div>
         </div>
         <div class='container log'>
-            <p id='log'>Console</p>
+            <p class='console'>Console</p>
+            <p id='log'></p>
         </div>
     </body>
 </html>

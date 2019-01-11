@@ -1,6 +1,7 @@
 // here is useless stuff
 let genRandNum = (maxNum) => Math.floor(Math.random()* (maxNum-1+1))+1;
 
+// Basic character object
 let characterObj = () => {
 
     let obj = {
@@ -15,6 +16,7 @@ let characterObj = () => {
 
 let character;
 
+// shuffles the array by accepting an input and returns a new array
 function shuffle(array) {
     let j, x, i;
     for (i = array.length -1; i> 0; i--){
@@ -26,6 +28,7 @@ function shuffle(array) {
     return array;
 };
 
+// modifies the character so it will have the requirements
 function modifyCharacter() {
     let newCharacter = characterObj();
     let keys = Object.keys(newCharacter);
@@ -36,14 +39,14 @@ function modifyCharacter() {
             if (shuffledArr[i] === 'fatigue') {
                 newCharacter[shuffledArr[i]] += genRandNum(6);
             } else{
-                newCharacter[shuffledArr[i]] += genRandNum(6);
+                newCharacter[shuffledArr[i]] += genRandNum(3);
             };
         };
         if (i>1){
             if (shuffledArr[i] === 'fatigue') {
                 newCharacter[shuffledArr[i]] -= genRandNum(6);
             } else{
-                newCharacter[shuffledArr[i]] -= genRandNum(6);
+                newCharacter[shuffledArr[i]] -= genRandNum(3);
             };
         };
     };
@@ -51,6 +54,7 @@ function modifyCharacter() {
     return newCharacter;
 };
 
+// new character 
 function newCharacter() {
     character = modifyCharacter();
 
@@ -101,6 +105,7 @@ function initialize(){
     check();
 };
 
+// checks every turn to change the html
 function check(){
     console.log(opponent, player);
     
@@ -127,6 +132,7 @@ function check(){
     };
 };
 
+// returnsa random bot action
 function getBotAction(){
     let botActions = ['attack', 'defend'];
     if (player.fatigue*2<=opponent.fatigue){
@@ -136,6 +142,7 @@ function getBotAction(){
     };
 };
 
+// attack function
 function attack(){
     let damage = (player.strength + player.speed + player.cunning)/(genRandNum(6));
     let defense = player.speed + genRandNum(6);
@@ -200,6 +207,7 @@ function attack(){
     check();
 };
 
+// defense function
 function defend(){
     let defense = player.speed + player.cunning;
     let botAction = getBotAction();
@@ -245,6 +253,7 @@ function defend(){
     check();
 };
 
+// finisher move
 function finisher(){
     let damage = player.strength + player.speed;
     let defense = player.speed + genRandNum(6);

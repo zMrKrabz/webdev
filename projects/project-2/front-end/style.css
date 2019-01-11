@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald|ZCOOL+KuaiLe');
-@import url('https://fonts.googleapis.com/css?family=Staatliches|ZCOOL+QingKe+HuangYou');
+@import url('https://fonts.googleapis.com/css?family=Staatliches|ZCOOL+QingKe+HuangYou|Staatliches');
 
 .container {
     display: flex;
@@ -64,6 +64,8 @@ button:active {
     background-color: #fff;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
     padding: 5px 5px;
+    font-family: 'Staatliches', cursive;
+    margin: 5px 5px;
 }
 
 .startBattle{
@@ -115,8 +117,18 @@ button:active {
 
 .log {
     padding: 10px;
-    background-color: white;
-    color: black;
+    background-color: black;
     align-content: flex-start;
     flex-direction: row;
+    color: #fff;
 }
+
+.console {
+    color: yellow;
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: 30px;
+}
+
+.arena {
+    background-image: url('../images/artun-gokcen-arena-fire-for-the-web.jpg');
+};

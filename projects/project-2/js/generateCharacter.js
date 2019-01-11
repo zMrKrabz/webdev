@@ -1,3 +1,4 @@
+// template character object
 let characterObj = () => {
 
     let charObj = {
@@ -12,6 +13,7 @@ let characterObj = () => {
 
 let character;
 
+// generates a random number based on max number input
 let genRandNum = (maxNum) => Math.floor(Math.random()*maxNum);
 
 function shuffle(array) {
@@ -25,6 +27,7 @@ function shuffle(array) {
     return array;
 };
 
+// modifies the character, decrease 2 and increase 2
 function modifyCharacter() {
     let newCharacter = characterObj();
     let keys = Object.keys(newCharacter);
@@ -35,14 +38,14 @@ function modifyCharacter() {
             if (shuffledArr[i] === 'fatigue') {
                 newCharacter[shuffledArr[i]] += genRandNum(6);
             } else{
-                newCharacter[shuffledArr[i]] += genRandNum(6);
+                newCharacter[shuffledArr[i]] += genRandNum(3);
             };
         };
         if (i>1){
             if (shuffledArr[i] === 'fatigue') {
                 newCharacter[shuffledArr[i]] -= genRandNum(6);
             } else{
-                newCharacter[shuffledArr[i]] -= genRandNum(6);
+                newCharacter[shuffledArr[i]] -= genRandNum(3);
             };
         };
     };
@@ -50,6 +53,7 @@ function modifyCharacter() {
     return newCharacter;
 };
 
+// generates a new character
 function newCharacter() {
     character = modifyCharacter();
 
