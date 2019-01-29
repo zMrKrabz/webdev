@@ -1,73 +1,81 @@
 <!DOCTYPE html>
 
-    <html lang="en">
-    <head>
-        <meta charset="utf-8">
+	<html lang="en">
+	<head>
+		<meta charset="utf-8">
 
-        <title>Tutorial-19-2</title>
+		<title>Tutorial-19-2</title>
 
-        <script>
-            function getRandomInteger(lesserInt, greaterInt){
-                return Math.floor(Math.random() * greaterInt) + lesserInt;
-            };
+		<script>
+			function getRandomInteger(lesserInt, greaterInt){
+				return Math.floor(Math.random() * greaterInt) + lesserInt;
+			};
 
-            function initialize(){
-                rollsSoFar = 0;
-                dicetable = document.getElementById("dicetable");
-            };
+			function initialize(){
+				rollsSoFar = 0;
+				rollsTotal = 0;
+				dicetable = document.getElementById("dicetable");
+			};
 
-            function rollDice(numRolls){
-                for (let i = 0; i < numRolls; i++){
-                    let diceroll = getRandomInteger(1, 6);
-                    let newRow = dicetable.insertRow();
-                    let newCell = newRow.insertCell();
-                    newCell.innerHTML = "Roll " + (rollsSoFar + 1);
+			function rollDice(numRolls){
+				for (let i = 0; i < numRolls; i++){
+					let diceroll = getRandomInteger(1, 6);
+					rollsTotal += diceroll;
+					let newRow = dicetable.insertRow(-1);
+					let newCell = newRow.insertCell(-1);
+					newCell.innerHTML = "Roll " + (rollsSoFar + 1);
 
-                    newCell = newRow.insertCell();
-                    newCell.innerHTML = diceroll;
-                    rollsSoFar++;
-                };
-            };
+					newCell = newRow.insertCell();
+					newCell.innerHTML = diceroll;
+					rollsSoFar++;
+				};
+				let row = dicetable.insertRow(-1);
+				let totalRollsCell = row.insertCell(-1).innerHTML='Number of rolls';
+				let totalRollsCellAmount = row.insertCell(-1).innerHTML=rollsSoFar;
 
-            function main(){
-                let numRolls = document.getElementById("numRolls").value;
-                
-                rollDice(numRolls);
-                console.log(rollsSoFar);
-                
-            };
-        </script>
+				let totalRollAmountRow = dicetable.insertRow(-1);
+				totalRollAmountRow.insertCell(-1).innerHTML='Total of All Rolls';
+				totalRollAmountRow.insertCell(-1).innerHTML=rollsTotal;
 
-        <style>
-            table {
-                border: thick solid grey;
-                border-collapse: collapse;
-                widows: 25%;
-            }
+			};
 
-            th, td {
-                border: thin solid black;
-                padding: 8px;
-                width: 50%;
-            }
-        </style>
+			function main(){
+				let numRolls = document.getElementById("numRolls").value;
+				
+				if (rollsSoFar>0){
+					for(let i=0;i<2;i++){
+						dicetable.deleteRow(-1);
+					};
+				};
+				rollDice(numRolls);
+				console.log(rollsSoFar);
+				
+			};
+		</script>
 
-    </head>
+		<style>
+			table {
+				border: thick solid grey;
+				border-collapse: collapse;
+				widows: 25%;
+			}
 
-    <body onload="initialize();">
-        Insert Number of rolls <input id="numRolls" type="text" /> <button onclick="main();">Roll Die</button>
-        <table id="dicetable">
-            <tr>
-                <th>Roll</th>
-                <th>Result</th>
-            </tr>
-        </table>
+			th, td {
+				border: thin solid black;
+				padding: 8px;
+				width: 50%;
+			}
+		</style>
 
-        <table id="numCount">
-            <tr>
-                <th>Number</th>
-                <th>Rolls</th>
-            </tr>
-        </table>
-    </body>
+	</head>
+
+	<body onload="initialize();">
+		Insert Number of rolls <input id="numRolls" type="text" /> <button onclick="main();">Roll Die</button>
+		<table id="dicetable">
+			<tr>
+				<th>Roll</th>
+				<th>Result</th>
+			</tr>
+		</table>
+	</body>
 </html>
