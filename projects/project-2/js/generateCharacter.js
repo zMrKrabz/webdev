@@ -13,7 +13,7 @@ let characterObj = () => {
 
 let character;
 
-// generates a random number based on max number input
+// a random number based on max number input
 let genRandNum = (maxNum) => Math.floor(Math.random()*maxNum);
 
 function shuffle(array) {
@@ -69,5 +69,6 @@ function newCharacter() {
 
     sessionStorage.setItem('character', JSON.stringify(character));
     let startButton = document.getElementById('btn-start');
+    
     startButton.style.visibility='visible';
 };
