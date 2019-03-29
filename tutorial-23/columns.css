@@ -1,0 +1,21 @@
+.column {
+	display: inline-block;
+	width: 25%;
+	vertical-align: top;
+}
+
+.column-container {
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
+
+table {
+	border: 1px solid black;
+	width: 500px;
+	margin:auto;
+}
+
+td {
+	width: 30px;
+}

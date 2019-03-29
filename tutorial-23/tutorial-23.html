@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Tutorial 23</title>
+		<link rel='stylesheet' href="columns.css" />
+		<style></style>
+		<script>
+			function initialize(){
+				let row_template = index => {
+				return `
+				<tr>
+						<td>Step ${index}</td>
+						<td><input type="text" ></td>
+						<td><input type="text" ></td>
+					</tr>
+				`};
+
+				for (let i=1;i<10;i++){
+					let proof = document.getElementById("proof");
+					console.log(proof);
+					
+					let new_row = proof.insertRow(proof.rows.length);
+					new_row.innerHTML= row_template(i);
+				};
+				add_solutions()
+			};
+
+			function add_solutions(){
+				let row_template = index => {
+				return `
+				<tr>
+						<td>Step ${index}</td>
+						<td>Statement</td>
+						<td>Reason</td>
+					</tr>
+				`;};
+				
+				for (let i=0;i<10;i++) {
+					let solutions = document.getElementById("solutions");
+					
+					let new_row = solutions.insertRow(solutions.rows.length);
+					new_row.innerHTML= row_template(i);
+				};
+			}
+		</script>
+	</head>	
+	<body onload="initialize()">
+		<div class="column-container">
+			<h1>Triangle Proof</h1>
+			<div class="column">
+				<img src="first.png">
+			</div>
+			<div class="column">
+				<h2>Given: BD = BE, L 1 = L 2 Prove: Triangle ABC is isosceles </h2>
+				<table id="proof">
+					<tr>
+						<th></th>
+						<th>Statements</th>
+						<th>Reasons</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<br />
+		<div class="column-container">
+			<table id="solutions">
+				<tr>
+					<th></th>
+					<th>Statements</th>
+					<th>Reasons</th>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>
